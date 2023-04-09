@@ -1,9 +1,9 @@
-package com.wang.algorithm.structure;
+package com.wang.algorithm.simple;
 
-import java.util.Objects;
+import com.wang.algorithm.utils.HashUtils;
 
 /**
- * 布隆过滤器
+ * 概率数据结构 —— 布隆过滤器
  * <p>
  * 容积为 N 的过滤器，进行 K 次不同的 hash，将比特数组对应下标标为 1
  * <p>
@@ -15,7 +15,7 @@ import java.util.Objects;
  * @author Wang
  * @since 2023/4/8
  */
-public class BloomFilter {
+public class SimpleBloomFilter {
     private final int N;
     private final int[] filter; // 一个 int 32bit，将其看为二维数组进一步压缩空间
     private final int K;
@@ -25,12 +25,10 @@ public class BloomFilter {
      * @param num 数据量大小
      * @param fp  误报率
      */
-    public BloomFilter(int num, double fp) {
-        long n = (long) (-1 * num * Math.log(fp) / Math.pow(Math.log(2), 2));
-        n = (n / bN + 1) * bN;
-        N = (int) (n > Integer.MAX_VALUE >> 1 ? Integer.MAX_VALUE >> 1 : n);
+    public SimpleBloomFilter(int n, int k) {
+        N = n;
+        K = k;
         filter = new int[N];
-        K = 30;
     }
 
     /**
@@ -47,18 +45,8 @@ public class BloomFilter {
         return x >> k & 1;
     }
 
-    /**
-     * 参考 {@link java.util.Arrays#hashCode(int[] a)}
-     */
     private int hashCode(String s, int seed) {
-        if (Objects.isNull(s)) return 0;
-
-        int res = 1;
-        for (int i = 0; i < s.length(); i++) {
-            res = seed * res + s.charAt(i);
-        }
-
-        return (N - 1) & res;
+        return HashUtils.hashCode(s, seed) & (N - 1);
     }
 
     /**
