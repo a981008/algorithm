@@ -26,9 +26,9 @@ public class LRUCacheTest {
             } else {
                 if (!Objects.equals(c1.get(key), c2.get(key))) {
                     System.out.println("Oops!");
+                    System.out.println("key: " + key + " val: " + c1.get(key));
                     return;
                 }
-                System.out.println("key: " + key + " val: " + c1.get(key));
             }
         }
     }
