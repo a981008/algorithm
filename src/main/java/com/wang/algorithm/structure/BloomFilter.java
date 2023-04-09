@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class BloomFilter {
     private final int N;
-    private final int[] filter; // 一个 int 32 字节，将其看为二维数组进一步压缩空间
+    private final int[] filter; // 一个 int 32bit，将其看为二维数组进一步压缩空间
     private final int K;
     private final int bN = 32;
 
