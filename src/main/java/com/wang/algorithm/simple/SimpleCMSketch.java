@@ -14,6 +14,7 @@ import com.wang.algorithm.utils.HashUtils;
  * 统计时：收集 (i, y) 最小值
  *
  * @author Wang
+ * @see <a href="https://zhuanlan.zhihu.com/p/369981005">Count-min Sketch 算法</a>
  * @since 2023/4/9
  */
 public class SimpleCMSketch {
