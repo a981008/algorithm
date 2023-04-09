@@ -29,7 +29,7 @@ public class LRUCache<K, V> {
 
     private final Node<K, V> head; // 虚拟头节点
     private final Node<K, V> tail; // 虚拟尾节点
-    private final Map<K, Node<K, V>> map;
+    private final Map<K, Node<K, V>> map; // key -> node
     private final int cap;
 
     public LRUCache(int cap) {
