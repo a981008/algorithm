@@ -6,6 +6,11 @@ import java.util.Objects;
  * 布隆过滤器
  * <p>
  * 容积为 N 的过滤器，进行 K 次不同的 hash，将比特数组对应下标标为 1
+ * <p>
+ * 优化点
+ * 1. 利用位运算做标记
+ * 2. 更好的 hash
+ * 3. 最佳比特数组大小
  *
  * @author Wang
  * @since 2023/4/8
@@ -16,10 +21,16 @@ public class BloomFilter {
     private final int K;
     private final int bN = 32;
 
-    public BloomFilter(int n, int k) {
-        N = n;
-        filter = new int[N / bN];
-        K = k;
+    /**
+     * @param num 数据量大小
+     * @param fp  误报率
+     */
+    public BloomFilter(int num, double fp) {
+        long n = (long) (-1 * num * Math.log(fp) / Math.pow(Math.log(2), 2));
+        n = (n / bN + 1) * bN;
+        N = (int) (n > Integer.MAX_VALUE >> 1 ? Integer.MAX_VALUE >> 1 : n);
+        filter = new int[N];
+        K = 30;
     }
 
     /**

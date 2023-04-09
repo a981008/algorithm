@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class BloomFilterTest {
     public static void main(String[] args) {
-        BloomFilter bf = new BloomFilter(Integer.MAX_VALUE, 16);
+        BloomFilter bf = new BloomFilter(Integer.MAX_VALUE >> 10, 0.5);
         HashSet<String> set = new HashSet<>();
         Random random = new Random();
 
